@@ -48,4 +48,14 @@ public class Transaction {
     @Column(name = "reason")
     private String reason;
 
+    @Override
+    public String toString(){
+        return "TxUid: " + this.getTx_uid()
+                + ", debit acct: " + this.getDebit_account_no()
+                + ", debit IC: " + this.getDebit_ic_no()
+                + ", credit acct: " + this.getCredit_account_no()
+                + ", credit IC: " + this.getCredit_ic_no()
+                + ", amount: " + this.getAmount();
+    }
+
 }

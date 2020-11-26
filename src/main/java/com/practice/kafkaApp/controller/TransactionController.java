@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class TransactionController {
 
@@ -57,6 +58,7 @@ public class TransactionController {
         transactionDetail.setTx_uid("TX" + date);
         transactionDetail.setStatus("PROCESSING");
 
+        logger.info(transactionDetail.toString());
         this.template.send(transferTopic, transactionDetail);
         logger.info("Sending transaction detail: " + transactionDetail.getTx_uid() + ", TOPIC: " + transferTopic);
 
@@ -65,7 +67,9 @@ public class TransactionController {
 
     @KafkaListener(topics = "transfer-topic", containerFactory = "kafkaListenerContainerFactory")
     public void transferListener(Transaction transactionDetail){
+        logger.info("====================================");
         logger.info("Receiving transaction detail: " + transactionDetail.getTx_uid());
+        logger.info(transactionDetail.toString());
 
         try {
             transactionRepository.save(transactionDetail);

@@ -5,3 +5,4 @@ target/
 mvnw.cmd
 mvnw
 kafka-app.iml
+node_modules/
